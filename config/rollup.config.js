@@ -1,6 +1,7 @@
-import commonjs from 'rollup-plugin-commonjs'
-import replace from 'rollup-plugin-replace'
-import resolve from 'rollup-plugin-node-resolve'
+import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
+import replace from 'rollup-plugin-replace';
+import resolve from 'rollup-plugin-node-resolve';
 
 export default function (config) {
   return {
@@ -11,7 +12,10 @@ export default function (config) {
     plugins: [
       commonjs(),
       replace({ 'process.browser': JSON.stringify(!!config.browser) }),
-      resolve()
+      resolve(),
+      babel({
+        exclude: 'node_modules/**'
+      })
     ]
   }
 }
